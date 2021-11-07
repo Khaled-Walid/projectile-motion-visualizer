@@ -30,6 +30,13 @@ function toggleClass(className, ...cards) {
   }
 }
 
+function validateAngle(angle) {
+  if (angle < 0 || angle > 90) {
+    alert("Invalid Angle</br>Please enter a valid value between 0 and 90");
+    return false;
+  }
+}
+
 function calculateCoordinatesAtFrameTime(velocity, angle, time) {
   const x = velocity * time * Math.cos(angle);
   const y = velocity * time * Math.sin(angle) - 0.5 * g * Math.pow(time, 2);
@@ -72,8 +79,10 @@ const canvasCard = document.getElementById("canvas-card");
 
 function launchHandler() {
   const initialVelocity = +velocityInput.value;
+  if (!validateAngle(angleInput.value)) {
+    return;
+  }
   const initialangle = (+angleInput.value * Math.PI) / 180;
-
   const maximumHeight = calculateMaximumHeight(initialVelocity, initialangle);
   const maximumDistance = calculateMaximumDistance(
     initialVelocity,
@@ -81,7 +90,6 @@ function launchHandler() {
   );
   const IsHeightBiggerValue = maximumHeight > maximumDistance ? true : false;
 
-  // validate()
   let passedTime = 0;
   let counter = 0;
   toggleClass("hidden", inputsCard, canvasCard);
