@@ -42,11 +42,11 @@ function convertCoordinatesToPixels(
 ) {
   let scaledX, scaledY;
   if (IsHeightBiggerValue) {
-    scaledX = (x * canvasHeight) / maxDistance;
+    scaledX = (x * canvasHeight) / maxHeight;
     scaledY = (y * canvasHeight) / maxHeight;
   } else {
     scaledX = (x * canvasWidth) / maxDistance;
-    scaledY = (y * canvasWidth) / maxHeight;
+    scaledY = (y * canvasWidth) / maxDistance;
   }
   return { scaledX, scaledY };
 }
