@@ -30,8 +30,13 @@ function toggleClass(className, ...cards) {
   }
 }
 
-function validateAngle(angle) {
-  if (angle < 0 || angle > 90) {
+function validateInput(velocity, angle) {
+  if (velocity <= 0) {
+    alert("Invalid velocity. Please enter a value higher than 0");
+    return false;
+  }
+
+  if (angle <= 0 || angle > 90) {
     alert("Invalid angle. Please enter a valid value between 0 and 90");
     return false;
   }
@@ -81,7 +86,7 @@ let renderFrames;
 
 function launchHandler() {
   const initialVelocity = +velocityInput.value;
-  if (!validateAngle(angleInput.value)) {
+  if (!validateInput(initialVelocity, angleInput.value)) {
     return;
   }
   const initialangle = (+angleInput.value * Math.PI) / 180;
