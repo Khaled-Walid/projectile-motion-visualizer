@@ -120,7 +120,7 @@ function launchHandler() {
     counter++;
     console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
     drawOnCanvas(scaledCoordinates.scaledX, scaledCoordinates.scaledY);
-  }, frameTime);
+  }, 3000/180);
 }
 
 function restartHandler() {
