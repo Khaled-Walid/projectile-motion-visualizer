@@ -45,11 +45,11 @@ function convertCoordinatesToPixels(
 ) {
   let scaledX, scaledY;
   if (IsHeightBiggerValue) {
-    scaledX = (x * canvasHeight) / maxHeight;
-    scaledY = (y * canvasHeight) / maxHeight;
+    scaledX = (x * canvasWidth) / maxHeight;
+    scaledY = (y * canvasWidth) / maxHeight;
   } else {
-    scaledX = (x * canvasWidth) / maxDistance;
-    scaledY = (y * canvasWidth) / maxDistance;
+    scaledX = (x * canvasHeight) / maxDistance;
+    scaledY = (y * canvasHeight) / maxDistance;
   }
   return { scaledX, scaledY };
 }
@@ -60,12 +60,11 @@ const canvasHeight = canvas.width;
 const canvasWidth = canvas.height;
 
 function drawOnCanvas(x, y) {
-  const repositionY = 400 - y;
+  const repositionedY = 400 - y;
   ctx.beginPath();
-  ctx.arc(x, repositionY, 1, 0, Math.PI * 2);
-  ctx.fillStyle = "white"
-  ctx.fill()
-
+  ctx.arc(x, repositionedY, 1, 0, Math.PI * 2);
+  ctx.fillStyle = "white";
+  ctx.fill();
 }
 
 const inputsCard = document.getElementById("inputs-card");
@@ -117,7 +116,7 @@ function launchHandler() {
 function restartHandler() {
   velocityInput.value = null;
   angleInput.value = null;
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  ctx.clearRect(0, 0, canvasHeight, canvasWidth);
   toggleClass("hidden", inputsCard, canvasCard);
 }
 
