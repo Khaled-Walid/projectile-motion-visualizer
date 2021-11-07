@@ -53,22 +53,22 @@ function convertCoordinatesToPixels(
 ) {
   let scaledX, scaledY;
   if (IsHeightBiggerValue) {
-    scaledX = (x * canvasWidth) / maxHeight;
-    scaledY = (y * canvasWidth) / maxHeight;
+    scaledX = (x * canvasHeight) / maxHeight;
+    scaledY = (y * canvasHeight) / maxHeight;
   } else {
-    scaledX = (x * canvasHeight) / maxDistance;
-    scaledY = (y * canvasHeight) / maxDistance;
+    scaledX = (x * canvasWidth) / maxDistance;
+    scaledY = (y * canvasWidth) / maxDistance;
   }
   return { scaledX, scaledY };
 }
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const canvasHeight = canvas.width;
-const canvasWidth = canvas.height;
+const canvasWidth = canvas.width;
+const canvasHeight = canvas.height;
 
 function drawOnCanvas(x, y) {
-  const repositionedY = 400 - y;
+  const repositionedY = canvasHeight - y;
   ctx.beginPath();
   ctx.arc(x, repositionedY, 1, 0, Math.PI * 2);
   ctx.fillStyle = "white";
@@ -120,14 +120,14 @@ function launchHandler() {
     counter++;
     console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
     drawOnCanvas(scaledCoordinates.scaledX, scaledCoordinates.scaledY);
-  }, 3000/180);
+  }, 3000 / 180);
 }
 
 function restartHandler() {
   velocityInput.value = null;
   angleInput.value = null;
   clearInterval(renderFrames);
-  ctx.clearRect(0, 0, canvasHeight, canvasWidth);
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   toggleClass("hidden", inputsCard, canvasCard);
 }
 
