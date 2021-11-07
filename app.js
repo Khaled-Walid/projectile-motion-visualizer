@@ -77,6 +77,7 @@ function drawOnCanvas(x, y) {
 
 const inputsCard = document.getElementById("inputs-card");
 const canvasCard = document.getElementById("canvas-card");
+let renderFrames;
 
 function launchHandler() {
   const initialVelocity = +velocityInput.value;
@@ -97,7 +98,7 @@ function launchHandler() {
   const finalTime = calculateTime(initialVelocity, initialangle);
   const frameTime = finalTime / 180;
   const finalDistance = calculateMaximumDistance(initialVelocity, initialangle);
-  const renderFrames = setInterval(() => {
+  renderFrames = setInterval(() => {
     let coordinates = calculateCoordinatesAtFrameTime(
       initialVelocity,
       initialangle,
@@ -125,6 +126,7 @@ function launchHandler() {
 function restartHandler() {
   velocityInput.value = null;
   angleInput.value = null;
+  clearInterval(renderFrames);
   ctx.clearRect(0, 0, canvasHeight, canvasWidth);
   toggleClass("hidden", inputsCard, canvasCard);
 }
