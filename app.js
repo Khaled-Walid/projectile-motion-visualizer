@@ -32,9 +32,10 @@ function toggleClass(className, ...cards) {
 
 function validateAngle(angle) {
   if (angle < 0 || angle > 90) {
-    alert("Invalid Angle</br>Please enter a valid value between 0 and 90");
+    alert("Invalid angle. Please enter a valid value between 0 and 90");
     return false;
   }
+  return true;
 }
 
 function calculateCoordinatesAtFrameTime(velocity, angle, time) {
