@@ -10,6 +10,9 @@
 const velocityInput = document.getElementById("velocity");
 const angleInput = document.getElementById("angle");
 
+const canvasHeight = 400;
+const canvasWidth = 600;
+
 const g = 9.8;
 
 function calculateMaximumHeight(velocity, angle) {
@@ -24,14 +27,29 @@ function calculateTime(velocity, angle) {
   return (2 * velocity * Math.sin(angle)) / g;
 }
 
-function calculatePositionAtFrameTime(velocity, angle, time) {
+function calculateCoordinatesAtFrameTime(velocity, angle, time) {
   const x = velocity * time * Math.cos(angle);
   const y = velocity * time * Math.sin(angle) - 0.5 * g * Math.pow(time, 2);
   return { x, y };
 }
 
-const inputsCard = document.getElementById("inputs-card");
-const canvasCard = document.getElementById("canvas-card");
+function convertCoordinatesToPixels(
+  IsHeightBiggerValue,
+  maxHeight,
+  maxDistance,
+  x,
+  y
+) {
+  let scaledX, scaledY;
+  if (IsHeightBiggerValue) {
+    scaledX = (x * canvasHeight) / maxDistance;
+    scaledY = (y * canvasHeight) / maxHeight;
+  } else {
+    scaledX = (x * canvasWidth) / maxDistance;
+    scaledY = (y * canvasWidth) / maxHeight;
+  }
+  return { scaledX, scaledY };
+}
 
 function toggleClass(className, ...cards) {
   for (card of cards) {
@@ -39,9 +57,20 @@ function toggleClass(className, ...cards) {
   }
 }
 
+const inputsCard = document.getElementById("inputs-card");
+const canvasCard = document.getElementById("canvas-card");
+
 function launchHandler() {
   const initialVelocity = +velocityInput.value;
   const initialangle = (+angleInput.value * Math.PI) / 180;
+
+  const maximumHeight = calculateMaximumHeight(initialVelocity, initialangle);
+  const maximumDistance = calculateMaximumDistance(
+    initialVelocity,
+    initialangle
+  );
+  const IsHeightBiggerValue = maximumHeight > maximumDistance ? true : false;
+
   // validate()
   let passedTime = 0;
   let counter = 0;
@@ -50,10 +79,17 @@ function launchHandler() {
   const frameTime = finalTime / 180;
   const finalDistance = calculateMaximumDistance(initialVelocity, initialangle);
   const renderFrames = setInterval(() => {
-    let coordinates = calculatePositionAtFrameTime(
+    let coordinates = calculateCoordinatesAtFrameTime(
       initialVelocity,
       initialangle,
       passedTime
+    );
+    let scaledCoordinates = convertCoordinatesToPixels(
+      IsHeightBiggerValue,
+      maximumHeight,
+      maximumDistance,
+      coordinates.x,
+      coordinates.y
     );
     passedTime += frameTime;
     if (coordinates.x > finalDistance || coordinates.y < 0) {
@@ -62,7 +98,7 @@ function launchHandler() {
       coordinates.y = 0;
     }
     counter++;
-    console.log(coordinates.x, coordinates.y, counter);
+    console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
   }, frameTime);
 }
 
