@@ -80,6 +80,23 @@ function drawOnCanvas(x, y) {
   ctx.fill();
 }
 
+function drawMaxValues(maxH, maxW) {
+  ctx.beginPath();
+  ctx.moveTo(maxW / 2, canvasHeight);
+  ctx.lineTo(maxW / 2, canvasHeight - maxH);
+  ctx.strokeStyle = "magenta";
+  ctx.stroke();
+  ctx.lineWidth = 3
+
+  ctx.beginPath();
+  ctx.moveTo(0, canvasHeight);
+  ctx.lineTo(maxW, canvasHeight);
+  ctx.closePath();
+  ctx.lineWidth = 10
+  ctx.strokeStyle = "cyan";
+  ctx.stroke();
+}
+
 const inputsCard = document.getElementById("inputs-card");
 const canvasCard = document.getElementById("canvas-card");
 let renderFrames;
@@ -121,6 +138,14 @@ function launchHandler() {
       clearInterval(renderFrames);
       coordinates.x = finalDistance;
       coordinates.y = 0;
+      let peakCoordinates = convertCoordinatesToPixels(
+        IsHeightBiggerValue,
+        maximumHeight,
+        maximumDistance,
+        maximumDistance,
+        maximumHeight
+      );
+      drawMaxValues(peakCoordinates.scaledY, peakCoordinates.scaledX);
     }
     counter++;
     console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
