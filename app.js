@@ -136,8 +136,6 @@ function launchHandler() {
     passedTime += frameTime;
     if (coordinates.x > finalDistance || coordinates.y < 0) {
       clearInterval(renderFrames);
-      coordinates.x = finalDistance;
-      coordinates.y = 0;
       let peakCoordinates = convertCoordinatesToPixels(
         IsHeightBiggerValue,
         maximumHeight,
@@ -145,6 +143,8 @@ function launchHandler() {
         maximumDistance,
         maximumHeight
       );
+      scaledCoordinates.scaledX = peakCoordinates.scaledX;
+      scaledCoordinates.scaledY = 0;
       drawMaxValues(peakCoordinates.scaledY, peakCoordinates.scaledX);
     }
     counter++;
