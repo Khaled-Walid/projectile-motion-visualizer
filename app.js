@@ -10,9 +10,6 @@
 const velocityInput = document.getElementById("velocity");
 const angleInput = document.getElementById("angle");
 
-const canvasHeight = 400;
-const canvasWidth = 600;
-
 const g = 9.8;
 
 function calculateMaximumHeight(velocity, angle) {
@@ -25,6 +22,12 @@ function calculateMaximumDistance(velocity, angle) {
 
 function calculateTime(velocity, angle) {
   return (2 * velocity * Math.sin(angle)) / g;
+}
+
+function toggleClass(className, ...cards) {
+  for (card of cards) {
+    card.classList.toggle(className);
+  }
 }
 
 function calculateCoordinatesAtFrameTime(velocity, angle, time) {
@@ -51,10 +54,18 @@ function convertCoordinatesToPixels(
   return { scaledX, scaledY };
 }
 
-function toggleClass(className, ...cards) {
-  for (card of cards) {
-    card.classList.toggle(className);
-  }
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const canvasHeight = canvas.width;
+const canvasWidth = canvas.height;
+
+function drawOnCanvas(x, y) {
+  const repositionY = 400 - y;
+  ctx.beginPath();
+  ctx.arc(x, repositionY, 1, 0, Math.PI * 2);
+  ctx.fillStyle = "white"
+  ctx.fill()
+
 }
 
 const inputsCard = document.getElementById("inputs-card");
@@ -99,12 +110,14 @@ function launchHandler() {
     }
     counter++;
     console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
+    drawOnCanvas(scaledCoordinates.scaledX, scaledCoordinates.scaledY);
   }, frameTime);
 }
 
 function restartHandler() {
   velocityInput.value = null;
   angleInput.value = null;
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   toggleClass("hidden", inputsCard, canvasCard);
 }
 
