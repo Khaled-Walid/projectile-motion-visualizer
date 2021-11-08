@@ -231,7 +231,6 @@
   let renderFrames;
 
   function launchHandler() {
-    toggleClass("hidden", inputsCard, canvasCard);
     canvasWidth = canvas.width;
     canvasHeight = canvas.height;
     const initialVelocity = +velocityInput.value;
@@ -247,7 +246,6 @@
     const IsHeightBiggerValue = maximumHeight > maximumDistance ? true : false;
 
     let passedTime = 0;
-    let counter = 0;
     const finalTime = calculateTime(initialVelocity, initialangle);
     const frameTime = finalTime / 180;
     const finalDistance = calculateMaximumDistance(initialVelocity, initialangle);
@@ -284,10 +282,9 @@
           +angleInput.value
         );
       }
-      counter++;
-      console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
       drawOnCanvas(scaledCoordinates.scaledX, scaledCoordinates.scaledY);
     }, 3000 / 180);
+    toggleClass("hidden", inputsCard, canvasCard);
   }
 
   function restartHandler() {
