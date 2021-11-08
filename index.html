@@ -45,6 +45,13 @@
     .hidden {
       display: none;
     }
+
+    @media (max-width: 800px) {
+      #canvas {
+        width: 95%;
+        height: 30%;
+      }
+    }
   </style>
 </head>
 
@@ -69,7 +76,7 @@
     <div class="card-body">
       <div class="center-flex">
         <h1 class="py-3 mx-5 display-6 text-center">Projectile Motion Visualizer</h1>
-        <canvas id="canvas" width="600" height="400"></canvas>
+        <canvas id="canvas" width="600px" height="400px"></canvas>
       </div>
 
       <button id="restart" class="mt-2 btn btn-primary">Restart</button>

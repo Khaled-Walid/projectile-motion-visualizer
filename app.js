@@ -69,8 +69,8 @@ function convertCoordinatesToPixels(
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
+let canvasWidth;
+let canvasHeight;
 
 function drawOnCanvas(x, y) {
   const repositionedY = canvasHeight - y;
@@ -135,6 +135,9 @@ const canvasCard = document.getElementById("canvas-card");
 let renderFrames;
 
 function launchHandler() {
+  toggleClass("hidden", inputsCard, canvasCard);
+  canvasWidth = canvas.width;
+  canvasHeight = canvas.height;
   const initialVelocity = +velocityInput.value;
   if (!validateInput(initialVelocity, angleInput.value)) {
     return;
@@ -149,7 +152,6 @@ function launchHandler() {
 
   let passedTime = 0;
   let counter = 0;
-  toggleClass("hidden", inputsCard, canvasCard);
   const finalTime = calculateTime(initialVelocity, initialangle);
   const frameTime = finalTime / 180;
   const finalDistance = calculateMaximumDistance(initialVelocity, initialangle);
