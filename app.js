@@ -80,7 +80,7 @@ function drawOnCanvas(x, y) {
   ctx.fill();
 }
 
-function drawMaxValues(maxH, maxW) {
+function drawMaxValues(maxH, maxW, actualMaxH, actualMaxW) {
   ctx.beginPath();
   ctx.arc(maxW / 2, canvasHeight, 5, 0, Math.PI * 2);
   ctx.fillStyle = "magenta";
@@ -100,7 +100,7 @@ function drawMaxValues(maxH, maxW) {
   ctx.fill();
 
   ctx.fillText(
-    `Max Height = ${Math.round(maxH)}`,
+    `Max Height = ${Math.round(actualMaxH)}`,
     maxW / 2 + 10,
     canvasHeight - maxH + 30
   );
@@ -124,7 +124,7 @@ function drawMaxValues(maxH, maxW) {
   ctx.fill();
 
   ctx.fillText(
-    `Max Distance = ${Math.round(maxW)}`,
+    `Max Distance = ${Math.round(actualMaxW)}`,
     maxW - 140,
     canvasHeight - 10
   );
@@ -178,7 +178,12 @@ function launchHandler() {
       );
       scaledCoordinates.scaledX = peakCoordinates.scaledX;
       scaledCoordinates.scaledY = 0;
-      drawMaxValues(peakCoordinates.scaledY, peakCoordinates.scaledX);
+      drawMaxValues(
+        peakCoordinates.scaledY,
+        peakCoordinates.scaledX,
+        maximumHeight,
+        maximumDistance
+      );
     }
     counter++;
     console.log(scaledCoordinates.scaledX, scaledCoordinates.scaledY, counter);
