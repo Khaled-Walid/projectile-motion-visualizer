@@ -82,19 +82,52 @@ function drawOnCanvas(x, y) {
 
 function drawMaxValues(maxH, maxW) {
   ctx.beginPath();
+  ctx.arc(maxW / 2, canvasHeight, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "magenta";
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.setLineDash([15, 5]);
   ctx.moveTo(maxW / 2, canvasHeight);
   ctx.lineTo(maxW / 2, canvasHeight - maxH);
   ctx.strokeStyle = "magenta";
   ctx.stroke();
-  ctx.lineWidth = 3
+  ctx.lineWidth = 3;
 
   ctx.beginPath();
+  ctx.arc(maxW / 2, canvasHeight - maxH, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "magenta";
+  ctx.fill();
+
+  ctx.fillText(
+    `Max Height = ${Math.round(maxH)}`,
+    maxW / 2 + 10,
+    canvasHeight - maxH + 30
+  );
+
+  ctx.beginPath();
+  ctx.arc(0, canvasHeight, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "cyan";
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.setLineDash([15, 5]);
   ctx.moveTo(0, canvasHeight);
   ctx.lineTo(maxW, canvasHeight);
-  ctx.closePath();
-  ctx.lineWidth = 10
   ctx.strokeStyle = "cyan";
   ctx.stroke();
+  ctx.lineWidth = 3;
+
+  ctx.beginPath();
+  ctx.arc(maxW, canvasHeight, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "cyan";
+  ctx.fill();
+
+  ctx.fillText(
+    `Max Distance = ${Math.round(maxW)}`,
+    maxW - 140,
+    canvasHeight - 10
+  );
 }
 
 const inputsCard = document.getElementById("inputs-card");
