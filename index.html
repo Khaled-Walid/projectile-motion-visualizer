@@ -162,7 +162,7 @@
     ctx.fill();
   }
 
-  function drawMaxValues(maxH, maxW, actualMaxH, actualMaxW) {
+  function drawMaxValues(maxH, maxW, actualMaxH, actualMaxW, angleInput) {
     ctx.beginPath();
     ctx.arc(maxW / 2, canvasHeight, 5, 0, Math.PI * 2);
     ctx.fillStyle = "magenta";
@@ -181,10 +181,17 @@
     ctx.fillStyle = "magenta";
     ctx.fill();
 
+    let positionHText;
+    if (angleInput < 20) {
+      positionHText = canvasHeight - maxH - 20
+    } else {
+      positionHText = canvasHeight - maxH + 20
+    }
+
     ctx.fillText(
       `Max Height = ${Math.round(actualMaxH)}m`,
       maxW / 2 + 10,
-      canvasHeight - maxH + 20
+      positionHText
     );
 
     ctx.beginPath();
@@ -205,9 +212,16 @@
     ctx.fillStyle = "cyan";
     ctx.fill();
 
+    let positionWText;
+    if (angleInput > 70) {
+      positionWText = maxW + 20
+    } else {
+      positionWText = maxW - 140
+    }
+
     ctx.fillText(
       `Max Distance = ${Math.round(actualMaxW)}m`,
-      maxW - 140,
+      positionWText,
       canvasHeight - 10
     );
   }
@@ -266,7 +280,8 @@
           peakCoordinates.scaledY,
           peakCoordinates.scaledX,
           maximumHeight,
-          maximumDistance
+          maximumDistance,
+          +angleInput.value
         );
       }
       counter++;
