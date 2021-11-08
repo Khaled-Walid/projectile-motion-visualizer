@@ -102,7 +102,7 @@ function drawMaxValues(maxH, maxW, actualMaxH, actualMaxW) {
   ctx.fillText(
     `Max Height = ${Math.round(actualMaxH)}`,
     maxW / 2 + 10,
-    canvasHeight - maxH + 30
+    canvasHeight - maxH + 20
   );
 
   ctx.beginPath();
