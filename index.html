@@ -189,7 +189,7 @@
     }
 
     ctx.fillText(
-      `Max Height = ${Math.round(actualMaxH)}m`,
+      `Max Height = ${Math.round(actualMaxH * 100) / 100}m`,
       maxW / 2 + 10,
       positionHText
     );
@@ -220,7 +220,7 @@
     }
 
     ctx.fillText(
-      `Max Distance = ${Math.round(actualMaxW)}m`,
+      `Max Distance = ${Math.round(actualMaxW * 100) / 100}m`,
       positionWText,
       canvasHeight - 10
     );
