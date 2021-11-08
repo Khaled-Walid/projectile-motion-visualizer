@@ -100,7 +100,7 @@ function drawMaxValues(maxH, maxW, actualMaxH, actualMaxW) {
   ctx.fill();
 
   ctx.fillText(
-    `Max Height = ${Math.round(actualMaxH)}`,
+    `Max Height = ${Math.round(actualMaxH)}m`,
     maxW / 2 + 10,
     canvasHeight - maxH + 20
   );
@@ -124,7 +124,7 @@ function drawMaxValues(maxH, maxW, actualMaxH, actualMaxW) {
   ctx.fill();
 
   ctx.fillText(
-    `Max Distance = ${Math.round(actualMaxW)}`,
+    `Max Distance = ${Math.round(actualMaxW)}m`,
     maxW - 140,
     canvasHeight - 10
   );
